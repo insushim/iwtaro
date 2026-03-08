@@ -32,7 +32,9 @@ jobs:
       - name: Rename APK
         run: |
           TAG_NAME=${GITHUB_REF#refs/tags/}
-          cp mystic-arcana/android/app/build/outputs/apk/release/app-release.apk mystic-arcana/android/MysticArcana-${TAG_NAME}.apk
+          APK_FILE=$(find mystic-arcana/android/app/build/outputs/apk/release -name "*.apk" | head -1)
+          echo "Found APK: $APK_FILE"
+          cp "$APK_FILE" mystic-arcana/android/MysticArcana-${TAG_NAME}.apk
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
