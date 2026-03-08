@@ -464,6 +464,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         generationConfig: {
           temperature: 0.8,
           maxOutputTokens: 8192,
+          responseMimeType: "application/json",
         },
       }),
     });
@@ -509,7 +510,6 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       return jsonResponse(result);
     } catch (parseError) {
       console.error("Failed to parse Gemini response as JSON:", parseError);
-      console.error("Raw text:", rawText);
       const fallback = buildFallbackResult(cards, spread, category, language);
       return jsonResponse(fallback);
     }
