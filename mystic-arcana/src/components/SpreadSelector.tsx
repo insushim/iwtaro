@@ -115,6 +115,13 @@ export default function SpreadSelector({ onSelect }: SpreadSelectorProps) {
                 {language === "ko" ? spread.nameKo : spread.name}
               </h3>
 
+              <p
+                className="text-xs mb-2 leading-relaxed"
+                style={{ color: "rgba(232, 224, 212, 0.6)" }}
+              >
+                {language === "ko" ? spread.descriptionKo : spread.description}
+              </p>
+
               <div
                 className="text-xs font-medium mb-1"
                 style={{ color: "#8b5cf6" }}

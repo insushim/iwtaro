@@ -178,13 +178,13 @@ export default function CardDeck({
           {/* Desktop: arc layout */}
           <div
             className="hidden md:flex justify-center items-end my-8 relative"
-            style={{ height: 420 }}
+            style={{ height: 520 }}
           >
             {Array.from({ length: displayCardCount }).map((_, i) => {
               const isSelected = selectedIndices.includes(i);
               const angle =
                 ((i - displayCardCount / 2) / displayCardCount) * 50;
-              const radius = 550;
+              const radius = 650;
               const rad = (angle * Math.PI) / 180;
               const x = Math.sin(rad) * radius;
               const y = -Math.cos(rad) * radius + radius;
@@ -209,11 +209,11 @@ export default function CardDeck({
                   disabled={selectedIndices.length >= cardCount && !isSelected}
                   className="absolute rounded-xl cursor-pointer disabled:cursor-not-allowed"
                   style={{
-                    width: 80,
-                    height: 120,
+                    width: 110,
+                    height: 160,
                     left: "50%",
                     bottom: 0,
-                    marginLeft: -40,
+                    marginLeft: -55,
                     backgroundColor: isSelected
                       ? "rgba(212, 165, 116, 0.15)"
                       : "#1a1a3e",
@@ -236,7 +236,7 @@ export default function CardDeck({
                       backgroundSize: "16px 16px",
                     }}
                   >
-                    <span className="text-2xl">{isSelected ? "✨" : "✦"}</span>
+                    <span className="text-3xl">{isSelected ? "✨" : "✦"}</span>
                     {isSelected && (
                       <span
                         className="text-[10px] font-bold"
