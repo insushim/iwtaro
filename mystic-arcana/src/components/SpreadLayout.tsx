@@ -23,8 +23,8 @@ export default function SpreadLayout({
     <>
       {/* Desktop: absolute positioning */}
       <div
-        className="hidden md:block relative w-full max-w-4xl mx-auto"
-        style={{ height: 600 }}
+        className="hidden md:block relative w-full max-w-5xl mx-auto"
+        style={{ height: 680 }}
       >
         {spread.positions.map((pos, index) => {
           const isRevealed = revealedIndices.includes(index);
@@ -52,8 +52,8 @@ export default function SpreadLayout({
                 <motion.div
                   className="relative"
                   style={{
-                    width: 110,
-                    height: 165,
+                    width: 140,
+                    height: 210,
                     transformStyle: "preserve-3d",
                   }}
                   animate={{ rotateY: isRevealed ? 180 : 0 }}
@@ -96,7 +96,7 @@ export default function SpreadLayout({
                     {card && (
                       <>
                         <div
-                          className="text-3xl mb-1"
+                          className="text-4xl mb-1"
                           style={{
                             transform: card.isReversed
                               ? "rotate(180deg)"
@@ -106,7 +106,7 @@ export default function SpreadLayout({
                           {card.card.cardBackEmoji}
                         </div>
                         <div
-                          className="text-[11px] text-center font-semibold leading-tight"
+                          className="text-[13px] text-center font-semibold leading-tight"
                           style={{ color: "#d4a574" }}
                         >
                           {language === "ko"
@@ -131,7 +131,7 @@ export default function SpreadLayout({
               </div>
 
               <div
-                className="text-xs mt-2 text-center font-medium max-w-[120px]"
+                className="text-sm mt-2 text-center font-medium max-w-[150px]"
                 style={{ color: "rgba(232, 224, 212, 0.7)" }}
               >
                 {posLabel}
