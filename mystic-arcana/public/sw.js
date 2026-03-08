@@ -1,4 +1,4 @@
-const CACHE_NAME = "mystic-arcana-v1";
+const CACHE_NAME = "mystic-arcana-v2";
 const STATIC_ASSETS = [
   "/",
   "/reading",
