@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun setupEdgeToEdge() {
-        WindowCompat.setDecoratesFitsSystemWindows(window, false)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
 
         window.statusBarColor = Color.parseColor("#0a0a1a")
         window.navigationBarColor = Color.parseColor("#0a0a1a")
