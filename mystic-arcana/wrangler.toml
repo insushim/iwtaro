@@ -5,4 +5,4 @@ pages_build_output_dir = "out"
 [[d1_databases]]
 binding = "DB"
 database_name = "mystic-arcana-db"
-database_id = "placeholder-will-be-set-after-creation"
+database_id = "e4bd53e8-af86-41cb-a680-b3f18688db1e"
