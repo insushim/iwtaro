@@ -120,7 +120,11 @@ export default function ReadingPage() {
         body: JSON.stringify({
           cards: drawnCards,
           spread: selectedSpread,
-          question,
+          question:
+            question ||
+            (language === "ko"
+              ? "전반적인 운세를 알려주세요"
+              : "Please tell me my general fortune"),
           category: selectedCategory.id,
           language,
         }),

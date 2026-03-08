@@ -84,29 +84,40 @@ export default function CardDeck({
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="relative w-40 h-56 my-8"
+          className="relative my-12"
+          style={{ width: 180, height: 260 }}
         >
           {[0, 1, 2, 3, 4].map((i) => (
             <motion.div
               key={i}
-              className="absolute inset-0 rounded-xl"
+              className="absolute inset-0 rounded-2xl"
+              animate={{
+                rotate: (i - 2) * 4,
+                x: (i - 2) * 3,
+              }}
+              transition={{ duration: 0.6 }}
               style={{
-                backgroundColor: "#1a1a2e",
-                border: "2px solid rgba(212, 165, 116, 0.3)",
+                backgroundColor: "#1a1a3e",
+                border: "2px solid rgba(212, 165, 116, 0.35)",
                 backgroundImage:
-                  "radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.1), transparent 60%)",
-                transform: `rotate(${(i - 2) * 3}deg) translateX(${(i - 2) * 2}px)`,
+                  "radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.15), transparent 60%)",
               }}
             >
               <div
-                className="w-full h-full flex items-center justify-center text-4xl rounded-xl"
+                className="w-full h-full flex flex-col items-center justify-center rounded-2xl"
                 style={{
                   backgroundImage:
                     "repeating-conic-gradient(rgba(212, 165, 116, 0.05) 0% 25%, transparent 0% 50%)",
                   backgroundSize: "20px 20px",
                 }}
               >
-                ✨
+                <span className="text-5xl mb-2">✦</span>
+                <span
+                  className="text-xs tracking-widest"
+                  style={{ color: "rgba(212, 165, 116, 0.5)" }}
+                >
+                  MYSTIC
+                </span>
               </div>
             </motion.div>
           ))}
@@ -167,13 +178,13 @@ export default function CardDeck({
           {/* Desktop: arc layout */}
           <div
             className="hidden md:flex justify-center items-end my-8 relative"
-            style={{ height: 280 }}
+            style={{ height: 420 }}
           >
             {Array.from({ length: displayCardCount }).map((_, i) => {
               const isSelected = selectedIndices.includes(i);
               const angle =
-                ((i - displayCardCount / 2) / displayCardCount) * 60;
-              const radius = 400;
+                ((i - displayCardCount / 2) / displayCardCount) * 50;
+              const radius = 550;
               const rad = (angle * Math.PI) / 180;
               const x = Math.sin(rad) * radius;
               const y = -Math.cos(rad) * radius + radius;
@@ -185,36 +196,55 @@ export default function CardDeck({
                   animate={{
                     opacity: 1,
                     x,
-                    y: isSelected ? y - 40 : y,
+                    y: isSelected ? y - 50 : y,
                     rotate: angle,
                   }}
                   transition={{ delay: i * 0.03, duration: 0.5 }}
                   whileHover={
                     !isSelected && selectedIndices.length < cardCount
-                      ? { y: y - 20, scale: 1.1 }
+                      ? { y: y - 30, scale: 1.08 }
                       : {}
                   }
                   onClick={() => handleCardClick(i)}
                   disabled={selectedIndices.length >= cardCount && !isSelected}
-                  className="absolute rounded-lg cursor-pointer disabled:cursor-not-allowed"
+                  className="absolute rounded-xl cursor-pointer disabled:cursor-not-allowed"
                   style={{
-                    width: 50,
-                    height: 72,
+                    width: 80,
+                    height: 120,
                     left: "50%",
                     bottom: 0,
-                    marginLeft: -25,
+                    marginLeft: -40,
                     backgroundColor: isSelected
-                      ? "rgba(212, 165, 116, 0.2)"
-                      : "#1a1a2e",
-                    border: `2px solid ${isSelected ? "#d4a574" : "rgba(212, 165, 116, 0.2)"}`,
+                      ? "rgba(212, 165, 116, 0.15)"
+                      : "#1a1a3e",
+                    border: `2px solid ${isSelected ? "#d4a574" : "rgba(212, 165, 116, 0.25)"}`,
                     boxShadow: isSelected
-                      ? "0 0 20px rgba(212, 165, 116, 0.5), 0 -5px 15px rgba(212, 165, 116, 0.2)"
-                      : "0 2px 8px rgba(0,0,0,0.3)",
+                      ? "0 0 25px rgba(212, 165, 116, 0.6), 0 -8px 20px rgba(212, 165, 116, 0.3)"
+                      : "0 4px 12px rgba(0,0,0,0.4)",
+                    backgroundImage: isSelected
+                      ? "none"
+                      : "radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.15), transparent 70%)",
                     zIndex: isSelected ? 30 : i,
                   }}
                 >
-                  <div className="w-full h-full flex items-center justify-center text-lg">
-                    {isSelected ? "✨" : "🌙"}
+                  <div
+                    className="w-full h-full flex flex-col items-center justify-center gap-1 rounded-xl"
+                    style={{
+                      backgroundImage: !isSelected
+                        ? "repeating-conic-gradient(rgba(212, 165, 116, 0.04) 0% 25%, transparent 0% 50%)"
+                        : "none",
+                      backgroundSize: "16px 16px",
+                    }}
+                  >
+                    <span className="text-2xl">{isSelected ? "✨" : "✦"}</span>
+                    {isSelected && (
+                      <span
+                        className="text-[10px] font-bold"
+                        style={{ color: "#d4a574" }}
+                      >
+                        {selectedIndices.indexOf(i) + 1}
+                      </span>
+                    )}
                   </div>
                 </motion.button>
               );
@@ -239,21 +269,29 @@ export default function CardDeck({
                     disabled={
                       selectedIndices.length >= cardCount && !isSelected
                     }
-                    className="flex-shrink-0 rounded-lg cursor-pointer disabled:cursor-not-allowed"
+                    className="flex-shrink-0 rounded-xl cursor-pointer disabled:cursor-not-allowed"
                     style={{
-                      width: 56,
-                      height: 80,
+                      width: 70,
+                      height: 105,
                       backgroundColor: isSelected
-                        ? "rgba(212, 165, 116, 0.2)"
-                        : "#1a1a2e",
-                      border: `2px solid ${isSelected ? "#d4a574" : "rgba(212, 165, 116, 0.2)"}`,
+                        ? "rgba(212, 165, 116, 0.15)"
+                        : "#1a1a3e",
+                      border: `2px solid ${isSelected ? "#d4a574" : "rgba(212, 165, 116, 0.25)"}`,
                       boxShadow: isSelected
                         ? "0 0 20px rgba(212, 165, 116, 0.5)"
-                        : "0 2px 8px rgba(0,0,0,0.3)",
+                        : "0 3px 10px rgba(0,0,0,0.4)",
                     }}
                   >
-                    <div className="w-full h-full flex items-center justify-center text-lg">
-                      {isSelected ? "✨" : "🌙"}
+                    <div className="w-full h-full flex flex-col items-center justify-center gap-1">
+                      <span className="text-xl">{isSelected ? "✨" : "✦"}</span>
+                      {isSelected && (
+                        <span
+                          className="text-[10px] font-bold"
+                          style={{ color: "#d4a574" }}
+                        >
+                          {selectedIndices.indexOf(i) + 1}
+                        </span>
+                      )}
                     </div>
                   </motion.button>
                 );
