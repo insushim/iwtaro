@@ -43,6 +43,27 @@ export const metadata: Metadata = {
   title: "MYSTIC ARCANA - AI Tarot Reading",
   description:
     "Discover your destiny with MYSTIC ARCANA. AI-powered tarot readings that combine ancient wisdom with modern insight. Explore your past, present, and future through the mystical art of tarot.",
+  openGraph: {
+    title: "MYSTIC ARCANA - AI Tarot Reading",
+    description:
+      "AI-powered tarot readings combining ancient wisdom with modern insight. 78 cards, 8 spreads, deep personalized interpretations.",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "MYSTIC ARCANA - AI Tarot Reading",
+    description:
+      "AI-powered tarot readings combining ancient wisdom with modern insight.",
+    images: ["/og-image.png"],
+  },
+  icons: {
+    icon: [
+      { url: "/icons/icon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: "/icons/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({
@@ -61,7 +82,7 @@ export default function RootLayout({
           content="black-translucent"
         />
         <meta name="apple-mobile-web-app-title" content="MYSTIC ARCANA" />
-        <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
       </head>
       <body
         className={`${cinzel.variable} ${cormorant.variable} ${raleway.variable} ${notoSerifKR.variable} antialiased`}
