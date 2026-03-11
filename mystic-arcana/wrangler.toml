@@ -2,7 +2,8 @@ name = "mystic-arcana"
 compatibility_date = "2024-09-23"
 pages_build_output_dir = "out"
 
-[[d1_databases]]
-binding = "DB"
-database_name = "mystic-arcana-db"
-database_id = "e4bd53e8-af86-41cb-a680-b3f18688db1e"
+# D1 temporarily removed (database was deleted, account limit reached)
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "mystic-arcana-db"
+# database_id = "e4bd53e8-af86-41cb-a680-b3f18688db1e"
