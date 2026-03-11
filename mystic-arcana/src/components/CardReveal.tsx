@@ -22,29 +22,39 @@ export default function CardReveal({
   const [isAutoRevealing, setIsAutoRevealing] = useState(true);
   const [lastRevealed, setLastRevealed] = useState<number | null>(null);
 
-  const allRevealed = revealedIndices.length === drawnCards.length;
+  const allRevealed =
+    revealedIndices.length >= drawnCards.length && drawnCards.length > 0;
 
   useEffect(() => {
     if (!isAutoRevealing) return;
 
+    let cancelled = false;
     let currentIndex = 0;
+    const timers: ReturnType<typeof setTimeout>[] = [];
+
     const revealNext = () => {
-      if (currentIndex >= drawnCards.length) {
-        setIsAutoRevealing(false);
+      if (cancelled || currentIndex >= drawnCards.length) {
+        if (!cancelled) setIsAutoRevealing(false);
         return;
       }
-      setRevealedIndices((prev) => [...prev, currentIndex]);
-      setLastRevealed(currentIndex);
+      const idx = currentIndex;
+      setRevealedIndices((prev) =>
+        prev.includes(idx) ? prev : [...prev, idx],
+      );
+      setLastRevealed(idx);
       currentIndex++;
       if (currentIndex < drawnCards.length) {
-        setTimeout(revealNext, 800);
+        timers.push(setTimeout(revealNext, 800));
       } else {
         setIsAutoRevealing(false);
       }
     };
 
-    const timer = setTimeout(revealNext, 500);
-    return () => clearTimeout(timer);
+    timers.push(setTimeout(revealNext, 500));
+    return () => {
+      cancelled = true;
+      timers.forEach(clearTimeout);
+    };
   }, [drawnCards.length, isAutoRevealing]);
 
   const handleCardClick = useCallback(
