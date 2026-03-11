@@ -54,7 +54,7 @@ export default function CardDeck({
       <motion.h2
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-2xl md:text-3xl font-bold text-center mb-2"
+        className="text-2xl md:text-3xl font-bold text-center mb-1"
         style={{ color: "#d4a574" }}
       >
         {phase === "initial" &&
@@ -71,7 +71,7 @@ export default function CardDeck({
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="text-sm mb-4"
+          className="text-sm mb-2"
           style={{ color: "rgba(232, 224, 212, 0.6)" }}
         >
           {language === "ko"
@@ -175,45 +175,48 @@ export default function CardDeck({
 
       {phase === "selecting" && (
         <>
-          {/* Desktop: arc layout */}
+          {/* Desktop: arc layout — centered vertically */}
           <div
-            className="hidden md:flex justify-center items-end my-8 relative"
-            style={{ height: 580 }}
+            className="hidden md:flex justify-center items-center relative"
+            style={{ height: 420 }}
           >
             {Array.from({ length: displayCardCount }).map((_, i) => {
               const isSelected = selectedIndices.includes(i);
               const angle =
                 ((i - displayCardCount / 2) / displayCardCount) * 50;
-              const radius = 720;
+              const radius = 520;
               const rad = (angle * Math.PI) / 180;
               const x = Math.sin(rad) * radius;
-              const y = -Math.cos(rad) * radius + radius;
+              const baseY = -Math.cos(rad) * radius + radius;
+              // Shift arc upward so it centers in the container
+              const y = baseY - 200;
 
               return (
                 <motion.button
                   key={i}
-                  initial={{ opacity: 0, y: 100 }}
+                  initial={{ opacity: 0, y: 80 }}
                   animate={{
                     opacity: 1,
                     x,
-                    y: isSelected ? y - 50 : y,
+                    y: isSelected ? y - 40 : y,
                     rotate: angle,
                   }}
                   transition={{ delay: i * 0.03, duration: 0.5 }}
                   whileHover={
                     !isSelected && selectedIndices.length < cardCount
-                      ? { y: y - 30, scale: 1.08 }
+                      ? { y: y - 25, scale: 1.08 }
                       : {}
                   }
                   onClick={() => handleCardClick(i)}
                   disabled={selectedIndices.length >= cardCount && !isSelected}
                   className="absolute rounded-xl cursor-pointer disabled:cursor-not-allowed"
                   style={{
-                    width: 130,
-                    height: 190,
+                    width: 195,
+                    height: 285,
                     left: "50%",
-                    bottom: 0,
-                    marginLeft: -65,
+                    top: "50%",
+                    marginLeft: -97,
+                    marginTop: -142,
                     backgroundColor: isSelected
                       ? "rgba(212, 165, 116, 0.15)"
                       : "#1a1a3e",
@@ -236,10 +239,10 @@ export default function CardDeck({
                       backgroundSize: "16px 16px",
                     }}
                   >
-                    <span className="text-3xl">{isSelected ? "✨" : "✦"}</span>
+                    <span className="text-4xl">{isSelected ? "✨" : "✦"}</span>
                     {isSelected && (
                       <span
-                        className="text-[10px] font-bold"
+                        className="text-xs font-bold"
                         style={{ color: "#d4a574" }}
                       >
                         {selectedIndices.indexOf(i) + 1}
